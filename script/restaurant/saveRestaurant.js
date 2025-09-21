@@ -1,11 +1,11 @@
 var XMLHttpRequest = require('xhr2');
-function saveRestaurant(name, description, rating, image) {
+function saveRestaurant(name, description, rating, costForOne, deliveryTime, image, cuisines) {
     var url_api =
         "http://localhost:8080/Resturant/save";
     var token = "Bearer ";
     var accessTokenObj = localStorage.getItem("token");
     console.log(accessTokenObj+" is the Token");
-    token += accessTokenObj;
+    token += accessTokenObj.trim();
     // var name = "My Secret Place";
     // var description = "Italian, Continental, Fast Food, Street Food, Desserts, Beverages";
     // var rating = "3.6";
@@ -20,6 +20,9 @@ function saveRestaurant(name, description, rating, image) {
         rating: rating,
         image_urls: image_urls,
         dishes: dishes,
+        costForOne: costForOne,
+        deliveryTime: deliveryTime,
+        cuisines: cuisines,
     };
     console.log(restaurant);
     var data = JSON.stringify(restaurant);

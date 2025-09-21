@@ -49,8 +49,8 @@ function saveRating(review, stars,dish_id ,resturant_id ,user_id) {
             console.log(dish_id);
             console.log(resturant_id);
             console.log();
-            alert("Review Added "+id);
-            window.location.href = "dish.html?id="+dish_id;
+            alert("Review Added by "+user_id);
+            window.location.href = "restaurant.html?id="+resturant_id;
         }
         else if (http.readyState == 4 && http.status == 403) {
             console.log("Forbidden");
@@ -66,4 +66,3 @@ function saveRating(review, stars,dish_id ,resturant_id ,user_id) {
     http.setRequestHeader("Authorization", token);
     http.send(data);
 }
-saveRating()

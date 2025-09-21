@@ -19,6 +19,32 @@ function getRestaurantById(id) {
       var rating = element["rating"];
       var image_urls = element["image_urls"];
       var dishes = element["dishes"];
+      var cuisines = element['cuisines'];
+      var costForOne = element['costForOne'];
+      var deliveryTime = element['deliveryTime'];
+      console.log(cuisines);
+      console.log(costForOne);
+      console.log(deliveryTime);
+
+
+      /*
+      
+        <li class="active" id="allSBK">All</li>
+        <li onclick="getDishesByCategory('Italian')">Italian</li>
+        <li onclick="getDishesByCategory('Continental')">Continental</li>
+        <li onclick="getDishesByCategory('Desserts')">Desserts</li>
+        <li onclick="getDishesByCategory('Beverages')">Beverages</li>
+      */
+
+      // 
+
+      for (let i = 0; i < cuisines.length; i++) {
+        var cuisine = cuisines[i];
+        var elementToBeAdded = '<li onclick="#">';
+        elementToBeAdded += cuisine;
+        elementToBeAdded += '</li>'
+        $("#allMenuCuisines").append(elementToBeAdded);
+      }
       console.log(id);
       console.log(name);
       console.log(description);
@@ -29,13 +55,21 @@ function getRestaurantById(id) {
       console.log(image_urls[0]);
       console.log(dishes);
       console.log();
+
+
+
       document.getElementById("restaurantNameSBK").innerText = name;
 
       // restaurantDescriptionSBK
       document.getElementById("restaurantDescriptionSBK").innerText =
         description;
 
-      document.getElementById("restaurantRatingSBK").innerText = rating;
+      document.getElementById("restaurantRatingSBK").innerText = rating + " ⭐️";
+      // restaurantCostForOneSBK
+      // 
+      // restaurantDeliveryTimeSBK
+      document.getElementById("restaurantCostForOneSBK").innerText = "₹ "+costForOne;
+      document.getElementById("restaurantDeliveryTimeSBK").innerText = "⌚️ "+deliveryTime+" Min";
 
       document
         .getElementById("restaurantImageSBK")
@@ -46,6 +80,8 @@ function getRestaurantById(id) {
         .setAttribute("onclick", "createAll(" + id + ")");
       showRating(id);
     } else if (http.readyState == 4 && http.status == 404) {
+      alert("No Such Restaurant Exist");
+    }else if (http.readyState == 4 && http.status == 401) {
       alert("No Such Restaurant Exist");
     }
   };
@@ -83,7 +119,7 @@ function showRating(restaurantId) {
   //   elementToBeAdded += 'the first column.</p>'
   //   elementToBeAdded += '<p><a class="btn" style="background: #ffbe33;">Stars</a></p>'
   //   elementToBeAdded += ' </div>'
-  //   $("#unique4").append(elementToBeAdded);
+  //    
 
   // }
   getAllRatingByResturantId(restaurantId);

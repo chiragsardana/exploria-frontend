@@ -45,8 +45,8 @@
           </span>
         </a>
         <!-- Need to Check Here Once -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" 
-          aria-expanded="false" aria-label="Toggle navigation" id= "closeButtonSBK" onclick="closeButton(true)">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
+          aria-label="Toggle navigation" id="closeButtonSBK" onclick="closeButton(true)">
           <span class=""> </span>
         </button>
 
@@ -121,9 +121,13 @@
               <h2>
                 <br>
                 <label for="restaurant_name">Restaurant Name:</label><br>
-                <input type="text" id="restaurant_name" placeholder="Restaau name..." /><br><br>
+                <input type="text" id="restaurant_name" placeholder="Restaurant name..." /><br><br>
                 <label for="restaurant_category">Rating:</label><br>
                 <input type="text" id="restaurant_category" placeholder="Rating...By Default 5" /><br><br>
+                <label for="restaurant_cost_for_one">Cost for One:</label><br>
+                <input type="text" id="restaurant_cost_for_one" placeholder="Cost for One..." /><br><br>
+                <label for="restaurant_delivery_time">Delivery Time:</label><br>
+                <input type="text" id="restaurant_delivery_time" placeholder="Delivery Time in Minutes..." /><br><br>
                 <!-- <label for="price">Price:</label><br> -->
                 <!-- <input type="text" id="restaurant_price" placeholder="0.00"/><br><br> -->
                 <button type="submit"
@@ -146,13 +150,16 @@
             <div class="heading_container">
               <h2>
                 <label for="restaurant_image">Add Image URL:</label><br>
-                <input type="url" id="restaurant_image" name="restaurant_image" placeholder="add image">
+                <input type="url" id="restaurant_image" name="restaurant_image" placeholder="Image URL...">
                 <br><br>
                 Description:
                 <br />
 
-                <textarea rows="6" name="description" id="restaurant_description"
+                <textarea rows="5" name="description" id="restaurant_description"
                   placeholder="Description..."></textarea><br>
+
+                <label for="restaurant_cuisines">Cuisines:</label><br>
+                <input type="text" id="restaurant_cuisines" placeholder="Comma Separated Cuisines..." /><br><br>
               </h2>
             </div>
             <!-- <p>
@@ -257,19 +264,19 @@
   <!-- footer section -->
 
   <script>
-    function closeButton(value){
-      
-      if(value == true){
+    function closeButton(value) {
+
+      if (value == true) {
         // alert("Clicking Open Button")
         document.getElementById('closeButtonSBK').setAttribute('onclick', 'closeButton(false)')
-        document.getElementById('navbarSupportedContent').setAttribute("class","collapse navbar-collapse show");
-      }else{
+        document.getElementById('navbarSupportedContent').setAttribute("class", "collapse navbar-collapse show");
+      } else {
         // alert("Clicking Close Button")
         document.getElementById('closeButtonSBK').setAttribute('onclick', 'closeButton(true)')
         // navbarSupportedContent
-        document.getElementById('navbarSupportedContent').setAttribute("class","collapse navbar-collapse");
+        document.getElementById('navbarSupportedContent').setAttribute("class", "collapse navbar-collapse");
       }
-      
+
     }
     function addNewRestaurant() {
       var restaurant_name = document.querySelector("#restaurant_name");
@@ -286,7 +293,18 @@
       var rating = restaurant_category.value;
       var image = restaurant_image.value;
       var description = restaurant_description.value;
-      saveRestaurant(name, description, rating, image);
+      /*
+      restaurant_cuisines
+              restaurant_delivery_time
+              restaurant_cost_for_one
+      */
+      var cuisines_str = restaurant_cuisines.value;
+      console.log(cuisines_str);
+      var cuisines = cuisines_str.split(",");
+      console.log(cuisines);
+      var deliveryTime = restaurant_delivery_time.value;
+      var costForOne = restaurant_cost_for_one.value;
+      saveRestaurant(name, description, rating, costForOne, deliveryTime,image, cuisines);
     }
   </script>
   <script src="/script/restaurant/saveRestaurant.js"></script>
@@ -457,13 +475,13 @@
             elementToBeAdded += '<a class="nav-link" href="addRestaurant.html">+ Restaurant</a>';
             elementToBeAdded += '</li>';
 
-            $("#navitemsSBK").append(elementToBeAdded);
+            // $("#navitemsSBK").append(elementToBeAdded);
             elementToBeAdded = '';
             elementToBeAdded += '<li class="nav-item">';
             elementToBeAdded += '<a class="nav-link" href="addDish.html">+ Dish</a>';
             elementToBeAdded += '</li>';
 
-            $("#navitemsSBK").append(elementToBeAdded);
+            // $("#navitemsSBK").append(elementToBeAdded);
 
             $("#removeBestSellingSBK").remove();
             document.getElementById('changeResSBK').setAttribute('href', 'AllRestaurantsAdmin.html');

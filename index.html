@@ -17,6 +17,11 @@
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <!--owl slider stylesheet -->
   <link rel="stylesheet" type="text/css"
@@ -32,7 +37,7 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-  <link href="css/search.css" rel="stylesheet" />
+
 
 
 
@@ -51,20 +56,40 @@
             Exploria
           </span>
         </a>
-        <!-- Need to Check Here Once -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" 
-          aria-expanded="false" aria-label="Toggle navigation" id= "closeButtonSBK" onclick="closeButton(true)">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
+          aria-label="Toggle navigation" id="closeButtonSBK" onclick="closeButton(true)">
           <span class=""> </span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav  mx-auto " id="navitemsSBK">
-            <li class="nav-item active">
-              <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item active" id="removeActive">
+              <a class="nav-link" id="addNewHref">Home <span class="sr-only" id="removeSpanHome">(current)</span></a>
             </li>
-            <li class="nav-item" id="removeBestSellingSBK">
-              <a class="nav-link" href="top_rated.html">Best Selling</a>
+            <!-- <li class="nav-item" id="removeBestSellingSBK">
+
+              <a class="nav-link" href="top_rated.html" id="recommend4you">Recommended 4 you</a>
+
+
             </li>
+             -->
+
+            <li class="nav-item dropdown" id="removeBestSellingSBK">
+              <a class="nav-link dropdown-toggle" href="#" id="recommend4you" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Recommended 4 You
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="recommend4you">
+                <li><a class="dropdown-item" href="#contentBasedFiltering" id="contentBasedFiltering" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();">Content Based Filtering</a></li>
+                <li><a class="dropdown-item" href="#collaborativeFiltering" id="collaborativeFiltering" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();">Collaborative Filtering</a></li>
+                <li><a class="dropdown-item" href="#HybridT1T2" id="HybridT1T2" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();">Hybrid(Type1 + Type 2)</a></li>
+                <li><a class="dropdown-item" href="#sentimentAnalysis" id="sentimentAnalysis" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();">Sentiment Analysis</a></li>
+                <li><a class="dropdown-item" href="#hybridT1T2T4" id="hybridT1T2T4" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();" >Hybrid(Type 1 + Type 2 + Type 4)</a></li>
+              </ul>
+            </li>
+
+
+
             <li class="nav-item">
               <a class="nav-link" href="restaurants.html" id="changeResSBK">Restaurants</a>
             </li>
@@ -74,9 +99,7 @@
               <i class="fa fa-user" aria-hidden="true"></i>
             </a> -->
 
-              <button  class="btn  my-2 my-sm-0 nav_search-btn" onclick="openForm()">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </button>
+
             <a href="#" class="order_online" data-toggle="modal" data-target="#loginModal" id="nameToBeSet">
               Login/SignUp
             </a>
@@ -93,83 +116,19 @@
     </div>
   </header>
   <!-- end header section -->
-  <script>
-    
-    function closeButton(value){
-      
-      if(value == true){
-        // alert("Clicking Open Button")
-        document.getElementById('closeButtonSBK').setAttribute('onclick', 'closeButton(false)')
-        document.getElementById('navbarSupportedContent').setAttribute("class","collapse navbar-collapse show");
-      }else{
-        // alert("Clicking Close Button")
-        document.getElementById('closeButtonSBK').setAttribute('onclick', 'closeButton(true)')
-        // navbarSupportedContent
-        document.getElementById('navbarSupportedContent').setAttribute("class","collapse navbar-collapse");
-      }
-      
-    }
-    function openForm() {
-      document.getElementById("myForm").style.display = "block";
-      document.getElementById("")
-    }
-    
-    function closeForm() {
-      document.getElementById("myForm").style.display = "none";
-    }
-    function saveRatingSBK(){
-      // alert("Search")
-      // window.location.href = 'index.html'
-    //   var id = window.location.href.split("?")[1];
-    // console.log(id.split("=")[1] + " is the ID");
-    // var dishId = id.split("=")[1];
-    // var email  = window.localStorage.getItem('email')
 
-    //   var restId = document.getElementById('idSBK').value;
-      var name = document.getElementById('reviewSBK').value;
-      var nearNcu = document.getElementById('starsSBK').value;
-    //   // console.log(user_id, review, stars, dish_id, resturant_id+" is the");
-    //   // reviewSBK
-    //   // starsSBK
-      // alert("Search Name: "+name+" and Near NCU"+nearNcu);
-      window.location.href="searchPage.html?value="+name+"&value="+nearNcu;
 
-    //   saveRating(review, stars,dishId ,restId ,email)
-    }
-    </script>
 
-  <div class="form-popup" id="myForm">
-    <div class="form-container">
-      <h1>Search Here</h1>
-  
-      <label for="restaurant"><b>Name</b></label>
-      <input type="text" placeholder="Enter the Name" name="rest" id="reviewSBK">
-  
-      <label for="restaurant"><b>Near NCU</b></label>
-      <input type="text" placeholder="Yes/No" name="rest" id="starsSBK">
-  
-  
-      <!-- <label for="restaurant"><b>restaurant</b></label>
-      <input type="text" placeholder="Enter restaurant" name="rest" required> -->
-  
-      <!-- <label for="restaurant"><b>restaurant</b></label>
-      <input type="text" placeholder="Enter restaurant" name="rest" required> -->
-      
-  
-      <button class="btn" onclick="saveRatingSBK()">Search</button>
-      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-      </div>
-  </div>
 
 
   <!-- <div id="sliderSection"></div> -->
 
-  <div class="hero_area">
+  <!-- <div class="hero_area">
     <div class="bg-box">
       <img src="images/hero-bg.jpg" alt="">
-    </div>
+    </div> -->
 
-    <!-- slider section -->
+  <!-- slider section
     <section class="slider_section ">
       <div id="customCarousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" id="unique">
@@ -189,8 +148,8 @@
 
       </div>
 
-    </section>
-    <!-- end slider section -->
+    </section> -->
+  <!-- end slider section -->
   </div>
 
 
@@ -203,23 +162,22 @@
 
 
       <div class="heading_container heading_center">
-        <h2>
-          Our Favourite
+        <h2 id="headingMain">
+          Top 12 Rated Restaurants in Sirsa
         </h2>
       </div>
 
-      <ul class="filters_menu">
+      <!-- <ul class="filters_menu">
         <li class="active" onclick="createAll()">All</li>
         <li onclick="getAllOurFavRestaurants()">Restaurants</li>
         <li onclick="getAllOurFavDishes()">Dishes</li>
-      </ul>
+      </ul> -->
 
       <div class="filters-content" id="unique3">
 
         <div class="row grid" id="unique2">
 
         </div>
-
 
       </div>
     </div>
@@ -274,10 +232,10 @@
                   dolore magna aliqua. Ut enim ad minim veniam
                 </p>
                 <h6>
-                  Chirag
+                  Chirag Sardana
                 </h6>
                 <p>
-                  magna aliqua
+                  Research Scholar
                 </p>
               </div>
               <div class="img-box">
@@ -286,45 +244,8 @@
             </div>
           </div>
 
-          <div class="item">
-            <div class="box">
-              <div class="detail-box">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam
-                </p>
-                <h6>
-                  Bhavya
-                </h6>
-                <p>
-                  magna aliqua
-                </p>
-              </div>
-              <div class="img-box">
-                <img src="images/client1.jpg" alt="" class="box-img">
-              </div>
-            </div>
-          </div>
 
-          <div class="item">
-            <div class="box">
-              <div class="detail-box">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam
-                </p>
-                <h6>
-                  Ayush
-                </h6>
-                <p>
-                  magna aliqua
-                </p>
-              </div>
-              <div class="img-box">
-                <img src="images/client2.jpg" alt="" class="box-img">
-              </div>
-            </div>
-          </div>
+
 
 
         </div>
@@ -347,7 +268,7 @@
               <a>
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                 <span>
-                  Anywhere in the World
+                  Sirsa, Haryana
                 </span>
               </a>
               <a>
@@ -407,7 +328,7 @@
       <div class="footer-info">
         <p>
           &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">ABCG</a><br><br>
+          <a href="https://html.design/">Devnologix</a><br><br>
         </p>
       </div>
     </div>
@@ -446,7 +367,20 @@
       })
     });
 
+    function closeButton(value) {
 
+      if (value == true) {
+        // alert("Clicking Open Button")
+        document.getElementById('closeButtonSBK').setAttribute('onclick', 'closeButton(false)')
+        document.getElementById('navbarSupportedContent').setAttribute("class", "collapse navbar-collapse show");
+      } else {
+        // alert("Clicking Close Button")
+        document.getElementById('closeButtonSBK').setAttribute('onclick', 'closeButton(true)')
+        // navbarSupportedContent
+        document.getElementById('navbarSupportedContent').setAttribute("class", "collapse navbar-collapse");
+      }
+
+    }
   </script>
 
 
@@ -470,24 +404,34 @@
           <div class="form-title text-center">
             <h1 style="font-family: 'Dancing Script', cursive;" id="registeration-login">Login</h1><br><br>
           </div>
-          <br>
+
           <div class="d-flex flex-column text-center">
             <form style="font-family: 'Open Sans', sans-serif;">
               <div class="form-group">
                 <input type="email" class="form-control" id="email1" placeholder="Your email address...">
               </div>
-              <br>
+              
               <div class="form-group">
                 <input type="password" class="form-control" id="password1" placeholder="Your password...">
               </div>
-              <br>
+              <!-- <br>
               <div class="form-group" style="display: none;" id="registeration-name">
                 <input type="text" class="form-control" id="name" placeholder="Your Name...">
               </div>
               <br>
               <div class="form-group" style="display: none;" id="registeration-phone">
                 <input type="number" class="form-control" id="phonenumber" placeholder="Your phone number...">
+              </div> -->
+              <div id="formloginsignup">
+
               </div>
+              <!-- <div class="form-group" style="display: block;" id="registeration-name-1">
+                <input type="text" class="form-control" id="name" placeholder="Your Name1...">
+              </div>
+              <br>
+              <div class="form-group" style="display: block;" id="registeration-phone-1">
+                <input type="number" class="form-control" id="phonenumber" placeholder="Your phone number1...">
+              </div> -->
 
 
               <br>
@@ -509,6 +453,92 @@
     <script src="/script/Auth/login.js"></script>
 
     <script>
+      function loadOtherAttributes() {
+
+        /*
+        formloginsignup
+        <label for="restaurant"><b>Cuisine</b></label>
+
+      <select class="form-select" style="display: none;" name="cuisine" id="cuisine">
+        <option value="" disabled selected>-- Select --</option>
+      </select>
+      <br>
+
+      <select class="form-select" name="costForOne" id="costForOne">
+        <option value="" disabled selected>-- Select --</option>
+        <option value="0-100">
+          < ₹ 100</option>
+        <option value="100-150"> > ₹ 100 & <= ₹ 150</option>
+        <option value="150-200"> > ₹ 150 & <= ₹ 200</option>
+        <option value="200-250"> > ₹ 200 & <= ₹ 250</option>
+        <option value="250-1000"> > ₹ 250</option>
+      </select>
+      <br>
+
+      <select class="form-select" name="deliveryTime" id="deliveryTime">
+        <option value="" disabled selected>-- Select --</option>
+        <option value="0-20">
+          < 20 Min</option>
+        <option value="30-40"> > 30 Min & <= 40 Min</option>
+        <option value="40-50"> > 40 Min & < 50 Min</option>
+        <option value="50-60"> > 50 Min & < 1 Hour</option>
+      </select>
+      <br>
+
+        */
+        var elementToBeAdded = '';
+
+        elementToBeAdded += '<div class="form-group"  id="registeration-name">'
+        elementToBeAdded += '       <input type="text" class="form-control" id="name" placeholder="Your Name...">'
+        elementToBeAdded += '    </div>'
+        elementToBeAdded += '   '
+        elementToBeAdded += '  <div class="form-group"  id="registeration-phone">'
+        elementToBeAdded += ' <input type="number" class="form-control" id="phonenumber" placeholder="Your phone number...">'
+        elementToBeAdded += '</div>'
+
+        elementToBeAdded += '<select class="form-select" name="cuisine" id="cuisineSignUp">';
+        elementToBeAdded += '</select><br>';
+        elementToBeAdded += '<select class="form-select" name="costForOne" id="costForOne">'
+        elementToBeAdded += '<option value="" disabled selected>-- Cost 4 One --</option>'
+        elementToBeAdded += '<option value="0-100">'
+        elementToBeAdded += '< ₹ 100</option>'
+        elementToBeAdded += '<option value="100-150"> > ₹ 100 & <= ₹ 150</option>'
+        elementToBeAdded += '<option value="150-200"> > ₹ 150 & <= ₹ 200</option>'
+        elementToBeAdded += '<option value="200-250"> > ₹ 200 & <= ₹ 250</option>'
+        elementToBeAdded += '<option value="250-1000"> > ₹ 250</option>'
+        elementToBeAdded += '</select>'
+        elementToBeAdded += '<br>'
+
+
+        elementToBeAdded += '<select class="form-select" name="deliveryTime" id="deliveryTime">'
+        elementToBeAdded += '<option value="" disabled selected>-- Delivery Time --</option>'
+        elementToBeAdded += '<option value="0-20">'
+        elementToBeAdded += ' < 20 Min</option > '
+        elementToBeAdded += '<option value="30-40"> > 30 Min & <= 40 Min</option>'
+        elementToBeAdded += '<option value="40-50"> > 40 Min & < 50 Min</option>'
+        elementToBeAdded += '<option value="50-60"> > 50 Min & < 1 Hour</option>'
+        elementToBeAdded += '</select><br>'
+
+
+
+        $("#formloginsignup").append(elementToBeAdded);
+        console.log("Load Cuisines");
+        fetch("http://localhost:8080/Resturant/getAllCuisines")
+          .then(response => response.json())
+          .then(data => {
+            let cuisineDropdown = document.getElementById("cuisineSignUp");
+            cuisineDropdown.innerHTML = '<option value="" disabled selected>-- Cuisines --</option>';
+            for (let i = 0; i < data.length; i++) {
+              let option = document.createElement("option");
+              option.value = data[i];
+              option.textContent = data[i];
+              cuisineDropdown.appendChild(option);
+            }
+          })
+          .catch(error => console.error("Error fetching cuisines:", error));
+
+
+      }
 
       function loginDone() {
         var email = document.getElementById("email1").value;
@@ -528,15 +558,18 @@
         var name = document.getElementById("name").value;
         var phone = document.getElementById("phonenumber").value;
         var businessTitle = "User"
-        console.log(email + " and " + password + " and " + name + " and " + phone);
-        register(username, password, email, phone, name, businessTitle);
+        var cuisines = document.getElementById('cuisineSignUp').value;
+        var costForOne = document.getElementById('costForOne').value;
+        var deliveryTime = document.getElementById('deliveryTime').value;
+        console.log(email + " and " + password + " and " + name + " and " + phone+" and "+cuisines+' and '+costForOne+" and "+deliveryTime);
+
+        register(username, password, email, phone, name, businessTitle, costForOne, deliveryTime, cuisines);
 
       }
       function signupFunc() {
         console.log("hi");
+        loadOtherAttributes();
         // registeration-name
-        document.getElementById("registeration-name").style.display = "block";
-        document.getElementById("registeration-phone").style.display = "block";
         document.getElementById("registeration-login").innerHTML = "Register";
         document.getElementById("registeration-logi").innerHTML = "Register";
         document.getElementById("registeration-logi").setAttribute("onclick", "registrationDone()");
@@ -548,8 +581,9 @@
       }
       function loginFunc() {
         console.log("hi");
-        document.getElementById("registeration-name").style.display = "none";
-        document.getElementById("registeration-phone").style.display = "none";
+        const el = document.getElementById("formloginsignup"); // must match HTML
+        el.innerHTML ="";
+
         document.getElementById("registeration-login").innerHTML = "Login";
         document.getElementById("registeration-logi").innerHTML = "Login";
         document.getElementById("registeration-logi").setAttribute("onclick", "loginDone()");
@@ -565,6 +599,13 @@
 
         // document.getElementById("nameToBeSet").innerHTML = name;
         if (name != null) {
+          // recommend4you
+          // document.getElementById("recommend4you");
+          // $("#removeBestSellingSBK").remove();
+
+
+
+
           document.getElementById("nameToBeSet").innerHTML = name;
           document.getElementById("logoutSBK").style.display = "block";
           // window.localStorage.clear();
@@ -590,7 +631,7 @@
             elementToBeAdded += '<a class="nav-link" href="addDish.html">+ Dish</a>';
             elementToBeAdded += '</li>';
 
-            $("#navitemsSBK").append(elementToBeAdded);
+            // $("#navitemsSBK").append(elementToBeAdded);
 
             $("#removeBestSellingSBK").remove();
             document.getElementById('changeResSBK').setAttribute('href', 'AllRestaurantsAdmin.html');

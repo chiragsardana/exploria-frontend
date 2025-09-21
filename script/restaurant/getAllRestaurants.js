@@ -1,5 +1,10 @@
+// this is All restaurants in Sirsa -  restaurants.html
+
+// This is the File we are using in our project
+
 var XMLHttpRequest = require("xhr2");
 function getAllRestaurants() {
+  console.log("getAllRestaurants()")
   var url_api = "http://localhost:8080/Resturant/get";
   var http = new XMLHttpRequest();
   http.onreadystatechange = function () {
@@ -9,14 +14,15 @@ function getAllRestaurants() {
       // console.log(json);
       var allRestaurant = JSON.parse(this.responseText);
 
-  
+      localStorage.setItem("restaurants", JSON.stringify(allRestaurant));
+
       var count = 0;
       var max = allRestaurant.length;
       var min = 0
       var list = [];
       for (let index = 0; index < allRestaurant.length; index++) {
-        if(count != 3){
-          randomNumber = Math.floor(Math.random() * (allRestaurant.length  - 0));
+        if (count != 3) {
+          randomNumber = Math.floor(Math.random() * (allRestaurant.length - 0));
           list.push(allRestaurant[randomNumber]);
           count++;
         }
@@ -25,7 +31,7 @@ function getAllRestaurants() {
         var id = element["id"];
         var name = element["name"];
         var description = element["description"];
-        if(description.includes('Near NCU')){
+        if (description.includes('Near NCU')) {
           description = description.substring(0, description.length - 8)
         }
         var rating = element["rating"];
@@ -38,11 +44,18 @@ function getAllRestaurants() {
         console.log();
 
         var elementToBeAdded = "";
-        elementToBeAdded += '<div class="col-sm-6 col-lg-4 all restaurants">';
+        elementToBeAdded += '<div class="col-sm-6 col-lg-4 all restaurants" id=mysbk'+id+'>';
         elementToBeAdded += '<div class="box">';
         elementToBeAdded += "<div>";
-        elementToBeAdded += '<div class="img-box">';
-        elementToBeAdded += '<img src="'+image_urls[0]+'" alt="">';
+        elementToBeAdded += '<div class="img-box" style="position: relative;">';
+        elementToBeAdded += '<img src="' + image_urls[0] + '" alt="">';
+
+        // Numeric rating overlay in green
+        elementToBeAdded += '<div style="position:absolute; bottom:8px; right:8px; background: rgba(255,255,255,0.8); padding:4px 6px; border-radius:4px; font-size:14px; color: green; font-weight:600;">';
+        elementToBeAdded += rating.toFixed(1); // show rating like 4.5
+        elementToBeAdded += ' ⭐️</div>';
+
+
         elementToBeAdded += "</div>";
         elementToBeAdded += '<div class="detail-box">';
         elementToBeAdded += "<h5>";
@@ -57,7 +70,7 @@ function getAllRestaurants() {
         elementToBeAdded += "<h6>";
         // elementToBeAdded += '$20'
         elementToBeAdded += "</h6>";
-        elementToBeAdded += '<a href="restaurant.html?id='+id+'">';
+        elementToBeAdded += '<a href="restaurant.html?id=' + id + '">';
         elementToBeAdded +=
           '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"';
         elementToBeAdded +=
@@ -131,108 +144,11 @@ function getAllRestaurants() {
         elementToBeAdded += "</div >";
         $("#unique2").append(elementToBeAdded);
       }
-      console.log(list+" is the List");
-      createSlider(list);
+      console.log(list + " is the List");
     }
-    
+
   };
   http.open("get", url_api, true);
   http.setRequestHeader("Content-Type", "application/json");
   http.send();
 }
-
-function createSlider(list) {
-  
-  for (let index = 0; index < 1; index++) {
-    const element = list[index];
-        // console.log(element)
-        var id = element["id"];
-        var name = element["name"];
-        var description = element["description"];
-        var rating = element["rating"];
-        var image_urls = element["image_urls"];
-        console.log(id);
-        console.log(name);
-        console.log(description);
-        console.log(rating);
-        console.log(image_urls);
-        console.log();
-    var elementToBeAdded = '<div class="carousel-item active">'
-    elementToBeAdded += '<div class="container">';
-    elementToBeAdded += '<div class="row">';
-    elementToBeAdded += '<div class="col-md-7 col-lg-6 ">';
-    elementToBeAdded += '<div class="detail-box">';
-    elementToBeAdded += '<h1>';
-    elementToBeAdded += name;
-    // elementToBeAdded += index;
-    elementToBeAdded += '</h1>';
-    elementToBeAdded += '<p>';
-    elementToBeAdded += ''+description;
-    elementToBeAdded += '</p>';
-    elementToBeAdded += '<div class="btn-box">';
-    elementToBeAdded += '<a href="" class="btn1">';
-    elementToBeAdded += 'Order Now';
-    elementToBeAdded += '</a>';
-    elementToBeAdded += '</div>';
-    elementToBeAdded += '</div>';
-    elementToBeAdded += '</div>';
-    elementToBeAdded += '</div>';
-    elementToBeAdded += '</div>';
-    elementToBeAdded += '</div>';
-
-    $("#unique").append(elementToBeAdded);
-
-    var elementToBeAdded1 = '<li data-target="#customCarousel1" data-slide-to="';
-    elementToBeAdded1 += index + '"class="active"></li>';
-    $("#unique1").append(elementToBeAdded1);
-  }
-
-
-  for (let index = 1; index < list.length; index++) {
-    const element = list[index];
-        // console.log(element)
-        var id = element["id"];
-        var name = element["name"];
-        var description = element["description"];
-        var rating = element["rating"];
-        var image_urls = element["image_urls"];
-        console.log(id);
-        console.log(name);
-        console.log(description);
-        console.log(rating);
-        console.log(image_urls);
-        console.log();
-    console.log("Secnd Forloop")
-    var elementToBeAdded = '<div class="carousel-item">'
-    elementToBeAdded += '<div class="container">';
-    elementToBeAdded += '<div class="row">';
-    elementToBeAdded += '<div class="col-md-7 col-lg-6 ">';
-    elementToBeAdded += '<div class="detail-box">';
-    elementToBeAdded += '<h1>';
-    elementToBeAdded += name;
-    // elementToBeAdded += index;
-    elementToBeAdded += '</h1>';
-    elementToBeAdded += '<p>';
-    elementToBeAdded += description;
-    elementToBeAdded += '</p>';
-    elementToBeAdded += '<div class="btn-box">';
-    elementToBeAdded += '<a href="" class="btn1">';
-    elementToBeAdded += 'Order Now';
-    elementToBeAdded += '</a>';
-    elementToBeAdded += '</div>';
-    elementToBeAdded += '</div>';
-    elementToBeAdded += '</div>';
-    elementToBeAdded += '</div>';
-    elementToBeAdded += '</div>';
-    elementToBeAdded += '</div>';
-
-    $("#unique").append(elementToBeAdded);
-
-    var elementToBeAdded1 = '<li data-target="#customCarousel1" data-slide-to="';
-    elementToBeAdded1 += index + '"></li>';
-    $("#unique1").append(elementToBeAdded1);
-  }
-
-}
-
-
