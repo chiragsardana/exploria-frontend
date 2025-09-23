@@ -57,10 +57,18 @@ function createAllOurFavRestaurants() {
     removeActive.innerHTML = "";
     createAnchor();
     url_api = "http://localhost:8080/Resturant/top12";
+  }else if (hash === "#hybridT1T4") {
+    mainHeading.innerText = "Hybrid(Content Based + Sentiment Analysis)";
+    removeActive.classList.remove("active");
+    makeActive.classList.add("active");
+    removeActive.innerHTML = "";
+    createAnchor();
+    url_api = "http://localhost:8080/Resturant/top12";
   } else {
     mainHeading.innerText = "Top 12 Rated Restaurants in Sirsa";
   }
 
+  // hybridT1T4
 
 
   // Now we need to manage just url path, as user click different url hits and same restaurants recovered.
