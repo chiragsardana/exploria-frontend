@@ -82,7 +82,7 @@
             <li class="nav-item">
               <a class="nav-link" href="restaurants.html" id="changeResSBK">Restaurants</a>
             </li>
-            <button  class="btn  my-2 my-sm-0 nav_search-btn" onclick="openForm()">
+            <button  class="btn  my-2 my-sm-0 nav_search-btn" onclick="openForm()" style="display: none;" id="rateme">
                 <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
                 RATE ME
               </button>
@@ -599,6 +599,7 @@
       if(name != null){
         document.getElementById("nameToBeSet").innerHTML = name;
         document.getElementById("logoutSBK").style.display = "block";
+        document.getElementById("rateme").style.display = "block";
         // window.localStorage.clear();
         document.getElementById("nameToBeSet").removeAttribute('data-toggle');
         // .setAttribute("onclick", "hehe()");
