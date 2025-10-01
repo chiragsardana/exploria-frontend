@@ -96,26 +96,22 @@
                     Sentiment Analysis
                   </a>
                 </li>
-                <!-- hybridT1T4 -->
-                 <li>
-                  <a class="dropdown-item" href="#hybridT1T4"
-                    onclick="event.preventDefault(); window.location.href='index.html' + this.getAttribute('href');">
-                    Hybrid(Type 1 + Type 4)
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#hybridT1T2T4"
-                    onclick="event.preventDefault(); window.location.href='index.html' + this.getAttribute('href');">
-                    Hybrid(Type 1 + Type 2 + Type 4)
-                  </a>
-                </li>
+                <li><a class="dropdown-item" href="#hybridT1T4" id="hybridT1T4"
+                    onclick="event.preventDefault(); window.location.href='index.html' + this.getAttribute('href');">Hybrid(CBF
+                    + Sentiment)</a></li>
+                <li><a class="dropdown-item" href="#hybridT2T4" id="hybridT1T4"
+                    onclick="event.preventDefault(); window.location.href='index.html' + this.getAttribute('href');">Hybrid(IBCF
+                    + Sentiment)</a></li>
+                <li><a class="dropdown-item" href="#hybridT1T2T4" id="hybridT1T2T4"
+                    onclick="event.preventDefault(); window.location.href='index.html' + this.getAttribute('href');">Hybrid(CBF
+                    + IBCF + Sentiment)</a></li>
               </ul>
 
-            </li>
+          </li>
 
-            <li class="nav-item active">
-              <a class="nav-link" href="restaurants.html" id="changeResSBK">Restaurants</a>
-            </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="restaurants.html" id="changeResSBK">Restaurants</a>
+          </li>
           </ul>
           <div class="user_option">
             <!-- <a href="" class="user_link">
@@ -213,7 +209,7 @@
       //   // starsSBK
       // alert("Search Name: "+name+" and Near NCU"+nearNcu);
       // window.location.href = "searchPage.html?value=" + name + "&value=" + nearNcu;
-      alert('Submit Clicked')
+      // alert('Submit Clicked')
 
       applyFilter()
 
@@ -710,13 +706,19 @@
         var email = window.localStorage.getItem('email');
         var name = window.localStorage.getItem('name');
         // document.getElementById("nameToBeSet").innerHTML = name;
+        document.getElementById('removeBestSellingSBK').style.display = "none";
         if (name != null) {
+
+          document.getElementById('removeBestSellingSBK').style.display = "block";
           document.getElementById("nameToBeSet").innerHTML = name;
           document.getElementById("logoutSBK").style.display = "block";
           // window.localStorage.clear();
           document.getElementById("nameToBeSet").removeAttribute('data-toggle');
+          document.getElementById("nameToBeSet").removeAttribute('data-target');
+          document.getElementById('nameToBeSet').href = "rating_user.html";
           // .setAttribute("onclick", "hehe()");
           document.getElementById("logoutSBK").setAttribute("onclick", "logoutDone()");
+          
 
           // <li class="nav-item">
           //     <a class="nav-link" href="restaurants.html">Restaurants</a>

@@ -74,7 +74,7 @@
             </li>
              -->
 
-            <li class="nav-item dropdown" id="removeBestSellingSBK">
+            <li class="nav-item dropdown" id="removeBestSellingSBK" style="display: none;">
               <a class="nav-link dropdown-toggle" href="#" id="recommend4you" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Recommended 4 You
@@ -82,10 +82,11 @@
               <ul class="dropdown-menu" aria-labelledby="recommend4you">
                 <li><a class="dropdown-item" href="#contentBasedFiltering" id="contentBasedFiltering" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();">Content Based Filtering</a></li>
                 <li><a class="dropdown-item" href="#collaborativeFiltering" id="collaborativeFiltering" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();">Collaborative Filtering</a></li>
-                <li><a class="dropdown-item" href="#HybridT1T2" id="HybridT1T2" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();">Hybrid(Type1 + Type 2)</a></li>
+                <li><a class="dropdown-item" href="#HybridT1T2" id="HybridT1T2" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();">Hybrid(CBF + IBCF)</a></li>
                 <li><a class="dropdown-item" href="#sentimentAnalysis" id="sentimentAnalysis" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();">Sentiment Analysis</a></li>
-                <li><a class="dropdown-item" href="#hybridT1T4" id="hybridT1T4" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();" >Hybrid(Type 1 + Type 4)</a></li>
-                <li><a class="dropdown-item" href="#hybridT1T2T4" id="hybridT1T2T4" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();" >Hybrid(Type 1 + Type 2 + Type 4)</a></li>
+                <li><a class="dropdown-item" href="#hybridT1T4" id="hybridT1T4" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();" >Hybrid(CBF + Sentiment)</a></li>
+                <li><a class="dropdown-item" href="#hybridT2T4" id="hybridT1T4" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();" >Hybrid(IBCF + Sentiment)</a></li>
+                <li><a class="dropdown-item" href="#hybridT1T2T4" id="hybridT1T2T4" onclick="event.preventDefault(); window.location.href=this.href; window.location.reload();" >Hybrid(CBF + IBCF + Sentiment)</a></li>
               </ul>
             </li>
 
@@ -452,7 +453,7 @@
 
 
     <script src="/script/Auth/login.js"></script>
-
+    <script src="script/rating/ratingByUserId.js"></script>
     <script>
       function loadOtherAttributes() {
 
@@ -606,11 +607,17 @@
 
 
 
-
+          // removeBestSellingSBK
+          document.getElementById('removeBestSellingSBK').style.display = "block";
           document.getElementById("nameToBeSet").innerHTML = name;
           document.getElementById("logoutSBK").style.display = "block";
           // window.localStorage.clear();
           document.getElementById("nameToBeSet").removeAttribute('data-toggle');
+          // data-target
+          document.getElementById("nameToBeSet").removeAttribute('data-target');
+          
+          document.getElementById('nameToBeSet').href = "rating_user.html";
+          
           // .setAttribute("onclick", "hehe()");
           document.getElementById("logoutSBK").setAttribute("onclick", "logoutDone()");
 
@@ -640,6 +647,10 @@
           // removeBestSellingSBK
         }
       }
+      function checkmydate(){
+        alert("clicked")
+        console.log("PRINT")
+      }
       function hehe() {
         console.log("hehe");
       }
@@ -664,6 +675,7 @@
 
 
     </script>
+    
     <script src="/script/Auth/register.js"></script>
     <script src="/script/ourfav.js"></script>
 

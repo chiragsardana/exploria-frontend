@@ -71,11 +71,39 @@
                 Recommended 4 You
               </a>
               <ul class="dropdown-menu" aria-labelledby="recommend4you">
-                <li><a class="dropdown-item" href="#">Content Based Filtering</a></li>
-                <li><a class="dropdown-item" href="#">Collaborative Filtering</a></li>
-                <li><a class="dropdown-item" href="#">Hybrid(Type1 + Type 2)</a></li>
-                <li><a class="dropdown-item" href="#">Sentiment Analysis</a></li>
-                <li><a class="dropdown-item" href="#">Hybrid(Type 1 + Type 2 + Type 4)</a></li>
+                <li>
+                  <a class="dropdown-item" href="#contentBasedFiltering"
+                    onclick="event.preventDefault(); window.location.href='index.html' + this.getAttribute('href');">
+                    Content Based Filtering
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#collaborativeFiltering"
+                    onclick="event.preventDefault(); window.location.href='index.html' + this.getAttribute('href');">
+                    Collaborative Filtering
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#HybridT1T2"
+                    onclick="event.preventDefault(); window.location.href='index.html' + this.getAttribute('href');">
+                    Hybrid(Type1 + Type 2)
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#sentimentAnalysis"
+                    onclick="event.preventDefault(); window.location.href='index.html' + this.getAttribute('href');">
+                    Sentiment Analysis
+                  </a>
+                </li>
+                <li><a class="dropdown-item" href="#hybridT1T4" id="hybridT1T4"
+                    onclick="event.preventDefault(); window.location.href='index.html' + this.getAttribute('href');">Hybrid(CBF
+                    + Sentiment)</a></li>
+                <li><a class="dropdown-item" href="#hybridT2T4" id="hybridT1T4"
+                    onclick="event.preventDefault(); window.location.href='index.html' + this.getAttribute('href');">Hybrid(IBCF
+                    + Sentiment)</a></li>
+                <li><a class="dropdown-item" href="#hybridT1T2T4" id="hybridT1T2T4"
+                    onclick="event.preventDefault(); window.location.href='index.html' + this.getAttribute('href');">Hybrid(CBF
+                    + IBCF + Sentiment)</a></li>
               </ul>
             </li>
 
@@ -596,7 +624,9 @@
       var email = window.localStorage.getItem('email');
       var name = window.localStorage.getItem('name');
       // document.getElementById("nameToBeSet").innerHTML = name;
+      document.getElementById('removeBestSellingSBK').style.display = "none";
       if(name != null){
+        document.getElementById('removeBestSellingSBK').style.display = "block";
         document.getElementById("nameToBeSet").innerHTML = name;
         document.getElementById("logoutSBK").style.display = "block";
         document.getElementById("rateme").style.display = "block";
