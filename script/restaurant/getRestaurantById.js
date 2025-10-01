@@ -164,7 +164,7 @@ function getAllRatingByResturantId(restId) {
         elementToBeAdded += "</p>";
         elementToBeAdded +=
           '<p><a class="btn" style="background: #ffbe33;">' +
-          stars +
+          stars + " ⭐️"
           "</a></p>";
         elementToBeAdded += " </div>";
         $("#unique4").append(elementToBeAdded);

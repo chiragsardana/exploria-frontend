@@ -1,6 +1,8 @@
 var XMLHttpRequest = require('xhr2');
 function getAllRatingByUserId() {
-    var userId = "Chirag19CSU071@ncuindia.edu"
+    // var userId = "Chirag19CSU071@ncuindia.edu"
+    var userId = window.localStorage.getItem('email');
+    console.log(userId+" is the Rating")
     var url_api =
       "http://localhost:8080/Rating/getAllRatingByUserId/"+ userId;
     var http = new XMLHttpRequest();
@@ -26,6 +28,21 @@ function getAllRatingByUserId() {
           console.log(dish_id);
           console.log(resturant_id);
           console.log();
+
+
+        var elementToBeAdded = "";
+        elementToBeAdded += '<div class="col-lg-4">';
+        elementToBeAdded += "<h2>" + "Restaurant 🆔: "+resturant_id + "</h2>";
+        elementToBeAdded += "<p>" + review + "";
+        elementToBeAdded += "</p>";
+        elementToBeAdded +=
+          '<p><a class="btn" style="background: #ffbe33;">' +
+          stars + " ⭐️"+
+          "</a></p>";
+        elementToBeAdded += " </div>";
+        $("#unique4").append(elementToBeAdded);
+
+
         }
       }
     };

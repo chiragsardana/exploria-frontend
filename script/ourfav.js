@@ -6,7 +6,9 @@
 
 function createAllOurFavRestaurants() {
 
-
+  var email = window.localStorage.getItem('email');
+  // email="pawandeep@exploria.com";
+  console.log(email+"is the email")
   var url = window.location.href;
 
   var mainHeading = document.getElementById('headingMain');
@@ -27,46 +29,55 @@ function createAllOurFavRestaurants() {
     // '<a href="index.html">' + div.innerText + '</a>'
     // innerHTML = ""
     createAnchor();
-    url_api = "http://localhost:8080/Resturant/top12";
+    url_api = "http://127.0.0.1:8000/content-based-filtering/"+email;
 
   } else if (hash === "#collaborativeFiltering") {
-    mainHeading.innerText = "Collaborative Filtering";
+    mainHeading.innerText = "Item Based Collaborative Filtering";
     removeActive.classList.remove("active");
     makeActive.classList.add("active");
     removeActive.innerHTML = "";
     createAnchor();
-    url_api = "http://localhost:8080/Resturant/top12";
+    url_api = "http://127.0.0.1:8000/collaborative-item-based-filtering/"+email;
+    // jatingonla@exploria.com
   } else if (hash === "#HybridT1T2") {
     mainHeading.innerText = "Hybrid(Content Based + Collaborative)";
     removeActive.classList.remove("active");
     makeActive.classList.add("active");
     removeActive.innerHTML = "";
     createAnchor();
-    url_api = "http://localhost:8080/Resturant/top12";
+    url_api = "http://127.0.0.1:8000/hybrid-cbf-ibcf-filtering/"+email;
   } else if (hash === "#sentimentAnalysis") {
     mainHeading.innerText = "Sentiment Analysis";
     removeActive.classList.remove("active");
     makeActive.classList.add("active");
     removeActive.innerHTML = "";
     createAnchor();
-    url_api = "http://localhost:8080/Resturant/top12";
+    url_api = "http://127.0.0.1:8000/sentiment-analysis";
+  } else if (hash === "#hybridT1T4") {
+    mainHeading.innerText = "Hybrid(Content Based Filtering + Sentiment Analysis)";
+    removeActive.classList.remove("active");
+    makeActive.classList.add("active");
+    removeActive.innerHTML = "";
+    createAnchor();
+    url_api = "http://127.0.0.1:8000/cbf-sentiment-analysis/"+email;
+  } else if (hash === "#hybridT2T4") {
+    mainHeading.innerText = "Hybrid(Item Based Collaborative Filtering + Sentiment Analysis)";
+    removeActive.classList.remove("active");
+    makeActive.classList.add("active");
+    removeActive.innerHTML = "";
+    createAnchor();
+    url_api = "http://127.0.0.1:8000/ibcf-sentiment-analysis/"+email;
   } else if (hash === "#hybridT1T2T4") {
-    mainHeading.innerText = "Hybrid(Content Based + Collaborative + Sentiment Analysis)";
+    mainHeading.innerText = "Hybrid(Content Based Filtering + Collaborative Filtering+ Sentiment Analysis)";
     removeActive.classList.remove("active");
     makeActive.classList.add("active");
     removeActive.innerHTML = "";
     createAnchor();
-    url_api = "http://localhost:8080/Resturant/top12";
-  }else if (hash === "#hybridT1T4") {
-    mainHeading.innerText = "Hybrid(Content Based + Sentiment Analysis)";
-    removeActive.classList.remove("active");
-    makeActive.classList.add("active");
-    removeActive.innerHTML = "";
-    createAnchor();
-    url_api = "http://localhost:8080/Resturant/top12";
+    url_api = "http://127.0.0.1:8000/ibcf-sentiment-analysis/"+email;
   } else {
     mainHeading.innerText = "Top 12 Rated Restaurants in Sirsa";
   }
+  // hybridT2T4
 
   // hybridT1T4
 
@@ -80,7 +91,30 @@ function createAllOurFavRestaurants() {
       if (http.status === 200) {
         var allRestaurant = JSON.parse(this.responseText);
         console.log(allRestaurant);
-        createAllOurFavRestaurantSBK(allRestaurant);
+
+        // Check if the array is not empty and contains the error
+        if (allRestaurant.length > 0 && allRestaurant[0].error === "No rating found for this user.") {
+          alert("No Rating for the User");
+          // Remove query parameters and reload explicitly
+          window.history.replaceState({}, document.title, window.location.pathname);
+          window.location.reload();
+
+
+        }
+        else if (allRestaurant.length > 0 && allRestaurant[0].error === "No preference found for this user.") {
+          alert("No Preference for the User");
+          // Remove query parameters and reload explicitly
+          window.history.replaceState({}, document.title, window.location.pathname);
+          window.location.reload();
+
+
+        } else {
+          createAllOurFavRestaurantSBK(allRestaurant);
+        }
+
+        // No preference found for this user
+
+
       } else {
         console.error("Error fetching restaurants:", http.status, http.statusText);
       }
@@ -132,6 +166,7 @@ function createAllOurFavRestaurantSBK(allRestaurant) {
     var costForOne = element['costForOne'];
     var deliveryTime = element['deliveryTime'];
     var cuisines = element['cuisines'];
+    var score = element['Score'];
     console.log(id);
     console.log(name);
     console.log(description);
@@ -155,6 +190,12 @@ function createAllOurFavRestaurantSBK(allRestaurant) {
     elementToBeAdded += '<div style="position:absolute; bottom:8px; right:8px; background: rgba(255,255,255,0.8); padding:4px 6px; border-radius:4px; font-size:14px; color: green; font-weight:600;">';
     elementToBeAdded += rating.toFixed(1); // show rating like 4.5
     elementToBeAdded += ' ⭐️</div>';
+
+    // Numeric rating overlay in green
+    elementToBeAdded += score != null ? '<div style="position:absolute; top:8px; left:8px; background: rgba(255,255,255,0.8); padding:4px 6px; border-radius:4px; font-size:14px; color: green; font-weight:600;">' : '';
+
+    elementToBeAdded += score != null ? Math.floor(score * 1000) / 1000 : ""; // show rating like 4.5
+    elementToBeAdded += score != null ? ' ✅ </div>' : "";
 
     elementToBeAdded += '</div>'; // close img-box
 
